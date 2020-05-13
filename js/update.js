@@ -1,7 +1,9 @@
 Chart.defaults.global.hover.mode = 'nearest';
 
 var dt = 200;
-var steps = 1000;
+var steps = 100;
+var extraSteps=10;
+var range = steps*dt/1000;
 var omega=0.1
 var pageInterval;
 
@@ -31,7 +33,9 @@ var options = {
         xAxes: [{
 	    scaleLabel: {
                 display: true,
-                labelString: 'Elapsed Time (s)'
+                labelString: 'Elapsed Time (s)',
+		min:Math.floor(-range),
+		max:0
             }
         }],
 	yAxes: [{
@@ -61,8 +65,8 @@ function plotFunc2(xval){
 
 function initializeData(){
     var i;
-    for (i = 1; i <= steps; i++){
-	xval = (i-steps)*dt/1000;
+    for (i = 1; i <= steps+extraSteps; i++){
+	xval = (i-steps-extraSteps)*dt/1000;
 	dataset.data.push({x:xval,y:plotFunc(xval)});
 	dataset2.data.push({x:xval,y:plotFunc2(xval)});
     }
@@ -98,6 +102,9 @@ function updatePlot() {
 
     dataset.data.shift();
     dataset2.data.shift();
+
+    chart.options.scales.xAxes[0].ticks.min = Math.floor(xval - range);
+    chart.options.scales.xAxes[0].ticks.max = Math.ceil(xval);
     
     chart.update(0);
 }
