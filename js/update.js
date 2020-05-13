@@ -1,18 +1,20 @@
 Chart.defaults.global.hover.mode = 'nearest';
 
-
-var dt = 500;
-var steps = 30;
+var dt = 200;
+var steps = 1000;
 var omega=0.1
-
-var myVar = setInterval(updatePlot, dt);
+var pageInterval;
 
 var t;
 var chart;
 var dataset = {label: 'Sin(x)',
-	       borderColor: 'rgb(255, 99, 132)',
+	       borderColor: 'red',
+	       showLine: true,
 	       data: []};
-var labels = [];
+var dataset2 = {label: '2*Cos(x)',
+		borderColor: 'green',
+		showLine: true,
+		data: []}
 var count=0;
 var t0 = getCurrentTime();
 
@@ -21,14 +23,21 @@ var options = {
         line: {
             tension: 0.0,
 	    fill:false
-        },
-	scales: {
+        }
+    },
+    scales: {
         xAxes: [{
-            ticks: {
-                fixedStepSize: 1.0,
+	    scaleLabel: {
+                display: true,
+                labelString: 'Elapsed Time (s)'
             }
-        }]
-    }
+        }],
+	yAxes: [{
+	    scaleLabel: {
+		display: true,
+		labelString: "Value",
+	    }
+	}]
     }
 };
 
@@ -44,12 +53,16 @@ function plotFunc(xval){
     return Math.sin(2*Math.PI*omega*xval);
 }
 
+function plotFunc2(xval){
+    return 2*Math.cos(2*Math.PI*omega*xval);
+}
+
 function initializeData(){
     var i;
     for (i = 1; i <= steps; i++){
 	xval = (i-steps)*dt/1000;
-	labels.push(xval);
-	dataset.data.push(plotFunc(xval));
+	dataset.data.push({x:xval,y:plotFunc(xval)});
+	dataset2.data.push({x:xval,y:plotFunc2(xval)});
     }
 }
 
@@ -58,13 +71,10 @@ function makePlot(){
     var ctx = document.getElementById('myChart').getContext('2d');
     chart = new Chart(ctx, {
 	// The type of chart we want to create
-	type: 'line',
+	type: 'scatter',
 	
 	// The data for our dataset
-	data: {
-            labels: labels,
-            datasets: [dataset]
-	},	
+	data: {datasets: [dataset,dataset2]},	
 	// Configuration options go here
 	options: options
     });
@@ -81,11 +91,11 @@ function updatePlot() {
     updateTime();
 
     xval = getElapsedTime();
-    labels.push(xval);
-    dataset.data.push(plotFunc(xval));
+    dataset.data.push({x:xval,y:plotFunc(xval)});
+    dataset2.data.push({x:xval,y:plotFunc2(xval)});
 
-    labels.shift();
     dataset.data.shift();
+    dataset2.data.shift();
     
     chart.update(0);
 }
@@ -99,3 +109,4 @@ function updateTime() {
 }
 
 initializePlot();
+pageInterval = setInterval(updatePlot, dt);
