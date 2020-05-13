@@ -1,16 +1,68 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <title>Dynamic Plotting</title>
+  </head>
+  <body>
+    <div class="container">
 
-<p>This demo plots a sine wave using a realtime clock</p>
-<p id="clock"></p>
-<p id="elapsed"></p>
-<p id="count"></p>
+      <h1>Dynamic Scoll Plotter</h1>
+    
+      <p>This demo plots a sine and cosine wave using a realtime clock. Bootstrap is used for sizing elements, while Chart.js is used for plotting.</p>
+      
+      <div class="row">
+	<div class="col col-lg-4">
+	  <table id="params" class="table table-hover">
+	    <tr>
+	      <th width="60%">Parameter</th>
+	      <th>Value</th>
+	    </tr>
+	    <tr>
+	      <td>Time</td>
+	      <td id="clock"></td>
+	    </tr>
+	    <tr>
+	      <td>Elapsed Time (s)</td>
+	      <td id="elapsed"></td>
+	    </tr>
+	    <tr>
+	      <td>Update Count</td>
+	      <td id="count"></td>
+	    </tr>
+	    <tr>
+	      <td>Time Range (s)</td>
+	      <td id="range"></td>
+	    </tr>
+	    <tr>
+	      <td>Update Interval (ms)</td>
+	      <td id="interval"></td> 
+	    </tr>
+	  </table>
+	</div>
+	<div class="col col-lg-8">
+	  
+	  <canvas id="myChart"></canvas>
+	</div>
+	
+      </div>
+    </div>
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<canvas id="myChart"></canvas>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script type="text/javascript" src="js/update.js"></script>
-
+    <!-- Chart.js include -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script type="text/javascript" src="js/update.js"></script>
+    
 </body>
 </html>

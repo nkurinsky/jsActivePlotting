@@ -10,10 +10,12 @@ var chart;
 var dataset = {label: 'Sin(x)',
 	       borderColor: 'red',
 	       showLine: true,
+	       pointRadius: 0,
 	       data: []};
 var dataset2 = {label: '2*Cos(x)',
 		borderColor: 'green',
 		showLine: true,
+		pointRadius: 0,
 		data: []}
 var count=0;
 var t0 = getCurrentTime();
@@ -104,8 +106,10 @@ function updateTime() {
     var d = new Date();
     t = d.toLocaleTimeString();
     document.getElementById("clock").innerHTML = t;
-    document.getElementById("elapsed").innerHTML = getElapsedTime();
+    document.getElementById("elapsed").innerHTML = getElapsedTime().toPrecision(3);
     document.getElementById("count").innerHTML = count;
+    document.getElementById("range").innerHTML = (steps/dt/1000).toPrecision(2);
+    document.getElementById("interval").innerHTML = dt;
 }
 
 initializePlot();
