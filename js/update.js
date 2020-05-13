@@ -115,7 +115,7 @@ function updateTime() {
     document.getElementById("clock").innerHTML = t;
     document.getElementById("elapsed").innerHTML = getElapsedTime().toPrecision(3);
     document.getElementById("count").innerHTML = count;
-    document.getElementById("range").innerHTML = (steps/dt/1000).toPrecision(2);
+    document.getElementById("range").innerHTML = (range).toPrecision(2);
     document.getElementById("interval").innerHTML = dt;
 }
 
