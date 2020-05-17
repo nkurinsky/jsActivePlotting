@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <title>Dynamic Plotting</title>
+  </head>
+  <body>
+    <div class="container">
+
+      <br>
+      <h1>Dynamic History Plotter</h1>
+    
+      <p>This demo plots a sine and cosine wave using a user-set date range. Bootstrap is used for sizing elements, while Chart.js is used for plotting.</p>
+
+      <div class="row">
+	<div class="col col-lg-4">
+	  <table id="params" class="table table-hover">
+	    <tr>
+	      <th width="55%">Parameter</th>
+	      <th>Value</th>
+	    </tr>
+	    <tr>
+	      <td>Start Date/Time</td>
+	      <td>
+		<input type="datetime-local" id="startTime" name="range-start"
+		       value="2020-05-01T00:00"
+		       min="2020-01-01T00:00" max="2020-12-31T00:00">
+	      </td>
+	    </tr>
+	    <tr>
+	      <td>End Date/Time</td>
+	      <td>
+		<input type="datetime-local" id="endTime" name="range-end"
+                       value="2020-05-01T12:00"
+                       min="2020-01-01T00:00" max="2020-12-31T00:00">
+	      </td>
+	    </tr>
+	    <tr>
+	      <td>Update Count</td>
+	      <td id="count"></td>
+	    </tr>
+	    <tr>
+	      <td>Time Range (s)</td>
+	      <td id="range"></td>
+	    </tr>
+	  </table>
+	</div>
+	<div class="col col-lg-8">	  
+	  <canvas id="myChart"></canvas>
+	</div>
+	
+      </div>
+      <div class="row">
+	<div class="col col-lg-4">
+	  <button onclick="updatePlot()">Update Plot</button>
+	</div
+      </div>
+    </div>
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Chart.js include -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script type="text/javascript" src="js/makePlot.js"></script>
+    
+</body>
+</html>
