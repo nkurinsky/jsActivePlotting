@@ -18,6 +18,7 @@ var dataset2 = {label: '2*Cos(x)',
 		pointRadius: 0,
 		data: []}
 var count=0;
+var t0;
 
 var options = {
     elements: {
@@ -30,8 +31,16 @@ var options = {
         xAxes: [{
 	    scaleLabel: {
                 display: true,
-                labelString: 'Elapsed Time (s)'
-            }
+                labelString: 'Time (hr)'
+            },
+	    ticks:{
+		callback: function(value, index, values) {
+		    console.log(value);
+		    var tstring = (new Date(value*1000)).toLocaleString();
+		    console.log(tstring);
+                    return tstring;
+		}
+	    }
         }],
 	yAxes: [{
 	    scaleLabel: {
@@ -44,16 +53,18 @@ var options = {
 
 function getStartTime(){
     var x = document.getElementById("startTime").value
-    return new Date(x).getTime() /1000;
+    //return new Date(x).getTime() /1000;
+    return new Date(x);
 }
 
 function getEndTime(){
     var x = document.getElementById("endTime").value
-    return new Date(x).getTime() /1000;
+    //return new Date(x).getTime() /1000;
+    return new Date(x);
 }
 
 function getElapsedTime(){
-    return getEndTime() - getStartTime();
+    return (getEndTime().getTime() - getStartTime().getTime())/1000;
 }
 
 function plotFunc(xval){
@@ -71,10 +82,12 @@ function updateData(){
 
     dataset.data = []
     dataset2.data = []
+
+    t0 = getStartTime().getTime();
     
     var i;
     for (i = 0; i <= steps; i++){
-	xval = (i)*dt/1000;
+	xval = (i*dt+t0)/1000;
 	dataset.data.push({x:xval,y:plotFunc(xval)});
 	dataset2.data.push({x:xval,y:plotFunc2(xval)});
     }
@@ -103,8 +116,10 @@ function updatePlot() {
     updateData();
     makePlot()
 
-    chart.options.scales.xAxes[0].ticks.min = 0;
-    chart.options.scales.xAxes[0].ticks.max = range;
+    chart.options.scales.xAxes[0].ticks.min = (getStartTime().getTime())/1000;
+    chart.options.scales.xAxes[0].ticks.max = (getEndTime().getTime())/1000;
+
+    console.log(dataset.data)
     
     chart.update(0);
 
